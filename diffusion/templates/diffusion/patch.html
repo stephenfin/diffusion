@@ -1,0 +1,23 @@
+{% extends "diffusion/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+projects {{ app_name|title }}
+{% endblock %}
+
+{% block content %}
+<ul class="nav nav-tabs" data-tabs="tabs">
+  <li class="active"><a href="#patch" data-toggle="tab">Patch</a></li>
+  <li><a href="#comments" data-toggle="tab">Comments <span class="badge">1</span></a></li>
+</ul>
+<div class="tab-content">
+  <div class="tab-pane active" id="patch">
+    <h1>Change</h1>
+    <p>orange orange orange orange orange</p>
+  </div>
+  <div class="tab-pane" id="comments">
+    <h1>Comments</h1>
+    <p>red red red red red red</p>
+  </div>
+</div>
+{% endblock %}

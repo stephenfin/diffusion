@@ -1,0 +1,55 @@
+body {
+    position: relative;
+    padding-top: 75px;
+}
+
+/* projects */
+
+table.projects {
+    border-collapse: separate;
+    border-spacing: 0px 0.5em;
+}
+
+table.projects th {
+    border-bottom: medium none;
+    color: #999;
+    text-transform: uppercase;
+    font-size: small;
+    font-weight: normal;
+}
+
+table.projects td:first-child {
+    border-left: 1px solid #CCC;
+}
+
+table.projects td {
+    vertical-align: middle;
+    padding: 0px;
+    border-top: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+}
+
+table.projects td:last-child {
+    border-right: 1px solid #CCC;
+}
+
+table.projects .project-name {
+    font-size: 120%;
+    color: #000;
+    font-weight: bold;
+}
+
+/* patches */
+/*
+ul.patches {
+    display: table;
+}
+
+ul.patches li {
+    display: table-row;
+}
+
+ul.patches li > div {
+    display: table-cell;
+}
+*/

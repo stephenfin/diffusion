@@ -1,0 +1,44 @@
+{% extends "diffusion/base.html" %}
+{% load staticfiles %}
+{% load humanize %}
+
+{% block title %}
+patches {{ app_name|title }}
+{% endblock %}
+
+{% block content %}
+<div class="table-responsive">
+  <table class="patches table table-hover">
+    <thead class="hidden-xs">
+      <tr>
+        <th class="">Subject</th>
+        <th class="">State</th>
+        <th class="">Owner</th>
+        <th class="">Delegate</th>
+        <th class="">Updated</th>
+        <th class="">Comments</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for patch in patches %}
+      <tr class="patch">
+        <td>
+          <a class="patch-name" href="#">{{patch.name}}</a>
+        </td>
+        <td class="project-description hidden-sm">
+          {{patch.date|naturaltime}}
+        </td>
+        <td class="project-url">
+          <a href="mailto:{{patch.submitter.email}}">{{patch.submitter.name}}</a>
+        </td>
+        <td>
+          {{ patch.delegate.username }}
+        </td>
+        <td>{{ patch.state }}</td>
+        <td><span class="badge">42</span></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
