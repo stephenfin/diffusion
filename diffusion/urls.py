@@ -3,7 +3,7 @@
 # This file is part of diffusion.
 
 from django.conf.urls import include, patterns, url
-from django.contrib import admin
+from django.contrib import admin, admindocs
 
 
 # pylint: disable=invalid-name
@@ -20,5 +20,6 @@ urlpatterns = patterns(
     url(r'^patch/$', 'patch.patch', name='patch'),
 
     # Admin
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     url(r'^admin/', include(admin.site.urls)),
 )

@@ -38,7 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django.contrib.admindocs',
     # 'debug_toolbar',
+    'diffusion',
 )
 
 MIDDLEWARE_CLASSES = (
