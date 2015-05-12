@@ -4,7 +4,20 @@
 
 from __future__ import absolute_import, unicode_literals
 
+from django.http import HttpResponse
 from django.shortcuts import render
+
+
+def project(request, project_id):
+    return HttpResponse('')
+
+
+def issues(request, project_id):
+    return HttpResponse('')
+
+
+def series(request, project_id):
+    return HttpResponse('')
 
 
 def patches(request, project_id):
@@ -28,7 +41,3 @@ def patches(request, project_id):
         pass
 
     return render(request, 'diffusion/project_patches.html', context)
-
-
-def info(request, project_id):
-    pass

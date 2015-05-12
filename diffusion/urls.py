@@ -15,14 +15,14 @@ from diffusion.views.api import (
 
 
 router = routers.SimpleRouter()
-router.register(r'people', PersonViewSet)
-router.register(r'projects', ProjectViewSet)
+router.register(r'people', PersonViewSet, 'people')
+router.register(r'projects', ProjectViewSet, 'projects')
 
 project_router = routers.NestedSimpleRouter(
     router, r'projects', lookup='project')
-project_router.register(r'issues', IssueViewSet)
-project_router.register(r'series', SeriesViewSet)
-project_router.register(r'patches', PatchViewSet)
+project_router.register(r'issues', IssueViewSet, 'issues')
+project_router.register(r'series', SeriesViewSet, 'series')
+project_router.register(r'patches', PatchViewSet, 'patches')
 
 issue_router = routers.NestedSimpleRouter(
     project_router, r'issues', lookup='issue')
@@ -38,11 +38,27 @@ urlpatterns = patterns(
     url(r'^$', 'index.index', name='home'),
 
     # Projects
-    url(r'^project/(?P<project_id>[^/]+)/list/$',
-        'project.patches'),
+    url(r'^(?P<project_id>[^/]+)/$', 'project.project'),
+    url(r'^(?P<project_id>[^/]+)/issues/$', 'project.issues'),
+    url(r'^(?P<project_id>[^/]+)/series/$', 'project.series'),
+    url(r'^(?P<project_id>[^/]+)/patches/$', 'project.patches'),
+
+    # Issues
+
+    url(r'^(?P<project_id>[^/]+)/issues/(?P<issue_id>\d+)$', 'issue.issue'),
+
+    # Series
+
+    url(r'^(?P<project_id>[^/]+)/issues/(?P<series_id>\d+)$', 'series.series'),
 
     # Patches
-    url(r'^patch/$', 'patch.patch', name='patch'),
+
+    url(r'^(?P<project_id>[^/]+)/patches/(?P<patch_id>\d+)$',
+        'patch.patch'),
+    url(r'^(?P<project_id>[^/]+)/patches/(?P<patch_id>\d+).diff$',
+        'patch.diff'),
+    url(r'^(?P<project_id>[^/]+)/patches/(?P<patch_id>\d+).mbox$',
+        'patch.mbox'),
 
     #
     # API

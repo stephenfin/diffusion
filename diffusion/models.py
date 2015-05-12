@@ -4,6 +4,7 @@
 
 from __future__ import unicode_literals
 
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import (
     Model, CharField, DateTimeField, TextField, ForeignKey, EmailField,
@@ -78,6 +79,9 @@ class Project(_Base):
     scm_url = CharField(max_length=2000, blank=True)
     webscm_url = CharField(max_length=2000, blank=True)
 
+    def get_absolute_url(self):
+        return reverse('diffusion.views.project.project', args=[self.name])
+
     def __str__(self):
         return 'Project <%s>' % (self.name, )
 
@@ -136,6 +140,10 @@ class Issue(_Email):
         self.number = self.project.issue_set.count() + 1
         super(Issue, self).save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse('diffusion.views.issue.issue', args=[
+            self.project.name, self.number])
+
     def __str__(self):
         # TODO(sfinucan) - this is a bit of hack. It would be better if
         #   we could autodetect subclassing/proxying
@@ -164,6 +172,10 @@ class Series(Issue):
     @property
     def has_patches(self):
         return getattr(self, 'patches').count() > 0
+
+    def get_absolute_url(self):
+        return reverse('diffusion.views.series.series', args=[
+            self.project.name, self.number])
 
     class Meta:
         verbose_name_plural = 'Series'
@@ -212,6 +224,10 @@ class Patch(Issue):
         self.state = Issue.STATE_CLOSED
         self.closed_at = datetime.datetime.now()
         self.save()
+
+    def get_absolute_url(self):
+        return reverse('diffusion.views.patch.patch', args=[
+            self.project.name, self.number])
 
     class Meta:
         verbose_name_plural = 'Patches'
