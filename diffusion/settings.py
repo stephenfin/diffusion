@@ -110,4 +110,5 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'diffusion', 'static', 'diffusion'),
+    os.path.join(BASE_DIR, 'diffusion', 'static', 'bower_components'),
 )
