@@ -11,11 +11,12 @@ from rest_framework_nested import routers
 
 from diffusion.views.api import (
     PersonViewSet, ProjectViewSet, IssueViewSet, SeriesViewSet, PatchViewSet,
-    CommentViewSet)
+    CommentViewSet, UserProfileViewSet)
 
 
 router = routers.SimpleRouter()
 router.register(r'people', PersonViewSet, 'people')
+router.register(r'users', UserProfileViewSet, 'users')
 router.register(r'projects', ProjectViewSet, 'projects')
 
 project_router = routers.NestedSimpleRouter(

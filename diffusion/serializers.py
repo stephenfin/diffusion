@@ -7,7 +7,8 @@ from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
 from rest_framework import serializers
 
-from diffusion.models import Person, Project, Issue, Series, Patch, Comment
+from diffusion.models import (
+    Person, Project, Issue, Series, Patch, Comment, UserProfile)
 
 
 class PersonSerializer(serializers.ModelSerializer):
@@ -87,3 +88,17 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         read_only_fields = ()
+
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    """
+    Serialize a :model:`diffusion.UserProfile`.
+    """
+    username = serializers.CharField(source='user.username')
+    email = serializers.EmailField(source='user.email')
+    first_name = serializers.CharField(source='user.first_name')
+    last_name = serializers.CharField(source='user.last_name')
+
+    class Meta:
+        model = UserProfile
+        read_only_fields = ('created_at', 'updated_at')

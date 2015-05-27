@@ -6,7 +6,8 @@ from __future__ import unicode_literals
 
 from django.contrib import admin
 
-from diffusion.models import Person, Project, Issue, Series, Patch, Comment
+from diffusion.models import (
+    Person, Project, Issue, Series, Patch, Comment, UserProfile)
 
 
 class PersonAdmin(admin.ModelAdmin):
@@ -35,9 +36,14 @@ class CommentAdmin(admin.ModelAdmin):
     readonly_fields = ('created_at', )
 
 
+class UserProfileAdmin(admin.ModelAdmin):
+    readonly_fields = ('created_at', 'updated_at')
+
+
 admin.site.register(Person, PersonAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Issue, IssueAdmin)
 admin.site.register(Series, SeriesAdmin)
 admin.site.register(Patch, PatchAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(UserProfile, UserProfileAdmin)

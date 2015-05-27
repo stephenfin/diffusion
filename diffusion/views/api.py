@@ -6,10 +6,11 @@ from __future__ import unicode_literals
 
 from rest_framework import viewsets
 
-from diffusion.models import Person, Project, Issue, Series, Patch, Comment
+from diffusion.models import (
+    Person, Project, Issue, Series, Patch, Comment, UserProfile)
 from diffusion.serializers import (
     PersonSerializer, ProjectSerializer, IssueSerializer, SeriesSerializer,
-    PatchSerializer, CommentSerializer)
+    PatchSerializer, CommentSerializer, UserProfileSerializer)
 
 
 class PersonViewSet(viewsets.ModelViewSet):
@@ -40,3 +41,8 @@ class PatchViewSet(viewsets.ModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+
+
+class UserProfileViewSet(viewsets.ModelViewSet):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer

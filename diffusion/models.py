@@ -5,10 +5,11 @@
 from __future__ import unicode_literals
 
 from django.core.urlresolvers import reverse
+from django.contrib.auth.models import User
 from django.db import models
 from django.db.models import (
     Model, CharField, DateTimeField, TextField, ForeignKey, EmailField,
-    PositiveIntegerField)
+    PositiveIntegerField, OneToOneField, ManyToManyField)
 from django.dispatch import receiver
 from django.utils.encoding import python_2_unicode_compatible
 import datetime
@@ -63,6 +64,10 @@ class Project(_Base):
     # timestamps
 
     updated_at = DateTimeField(default=datetime.datetime.now)
+
+    # ownership
+
+    owner = ForeignKey(User)
 
     # content
 
@@ -264,3 +269,34 @@ class Comment(_Email):
 
     def __str__(self):
         return 'Comment <%s>' % (self.msgid, )
+
+
+@python_2_unicode_compatible
+class UserProfile(_Base):
+    """
+    A :model:`diffusion.UserProfile` represents a registered user.
+    """
+    user = OneToOneField(User)
+
+    # timestamps
+
+    updated_at = DateTimeField(default=datetime.datetime.now)
+
+    # user settings
+
+    projects = ManyToManyField(Project, related_name='maintainers')
+
+    @property
+    def name(self):
+        if self.user.first_name or self.user.last_name:
+            names = [
+                x for x in [self.user.first_name, self.user.last_name] if x]
+            return ' '.join(names)
+        return self.user.username
+
+    def save(self, *args, **kwargs):
+        self.updated_at = datetime.datetime.now()
+        super(UserProfile, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return 'User <%s>' % (self.name, )
