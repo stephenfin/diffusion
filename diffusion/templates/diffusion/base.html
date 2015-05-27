@@ -1,64 +1,65 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}diffusion{% endblock %} | diffusion</title>
-    <link href="{% static "css/bootstrap.min.css" %}" rel="stylesheet">
-    <link href="{% static "css/diffusion.css" %}" rel="stylesheet">
-  </head>
+<head>
+  <!-- metadata -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <body>
-    <nav class="navbar navbar-fixed-top navbar-default">
-      <div class="container">
-        <div class="navbar-header col-md"> <!--part of navbar that's always present-->
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">{{ app_name|title|default:"diffusion" }}</a>
-        </div> <!-- /navbar-header -->
+  <!-- description -->
+  <title>{% block title %}diffusion{% endblock %} | diffusion</title>
 
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-right auth">
-              <li><a class="" href="#">Sign in</a></li>
-            </ul>
+  <!-- 3rd party stuff -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
-            <ul class="nav navbar-nav navbar-right">
-              <li><a class="" href="#">TODO</a></li>
-            </ul>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
-            <form name="search" method="get" action="#" class="navbar-form navbar-right" role="search">
-              <div class="form-group">
-                <div class="input-group">
-                  <input name="q" class="form-control" placeholder="Search all projects" type="text">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default" type="submit"><span class="fa fa-search">Search</span></button>
-                  </span>
-                </div>
-              </div>
-            </form>
+  <!-- custom -->
+  <link href="{% static "css/diffusion.css" %}" rel="stylesheet">
+  <link href="{% static "css/diffusion-icon.css" %}" rel="stylesheet">
 
-          </div> <!-- /navbar-collapse -->
-      </div> <!-- /container for navbar -->
-    </nav>
-
+  <script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip({
+            placement : 'top'
+        });
+    });
+  </script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-      {% block content %} {% endblock %}
-    </div> <!-- /container for content -->
 
-    <footer class="footer">
-      <div class="container">
-        <p class="text-muted">
-          TODO.
-        </p>
-      </div>  <!-- /container for footer -->
-    </footer>
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{% url 'diffusion.views.index.index' %}">{{ app_name|title|default:"diffusion" }}</a>
+      </div>  <!-- /navbar-header -->
 
-    <script src="{% static "js/jquery-1.11.2.min.js" %}"></script>
-    <script src="{% static "js/bootstrap.min.js" %}"></script>
-  </body>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="#"><i class="fa fa-cog"></i></a></li>
+          <li><a href="#"><i class="fa fa-bell-o"></i></a></li>
+          <li><a href="#"><i class="fa fa-sign-out"></i> Sign out</a></li>
+        </ul>
+      </div>  <!-- /navbar-collapse -->
+
+    </div>  <!-- /container for navbar -->
+  </nav>
+
+  <div class="container">
+    {% block content %} {% endblock %}
+  </div>  <!-- /container for content -->
+</body>
 </html>

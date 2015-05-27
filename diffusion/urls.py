@@ -49,7 +49,7 @@ urlpatterns = patterns(
 
     # Series
 
-    url(r'^(?P<project_id>[^/]+)/issues/(?P<series_id>\d+)$', 'series.series'),
+    url(r'^(?P<project_id>[^/]+)/series/(?P<series_id>\d+)$', 'series.series'),
 
     # Patches
 

@@ -7,13 +7,20 @@ from __future__ import absolute_import, unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render
 
+from diffusion.models import Issue, Patch, Project
+
 
 def project(request, project_id):
     return HttpResponse('')
 
 
 def issues(request, project_id):
-    return HttpResponse('')
+    context = {
+        'issues': Issue.objects.all(),
+        'project': Project.objects.get(list_id=project_id),
+    }
+
+    return render(request, 'diffusion/project_issues.html', context)
 
 
 def series(request, project_id):
@@ -21,23 +28,9 @@ def series(request, project_id):
 
 
 def patches(request, project_id):
-    from datetime import datetime
     context = {
-        'patches': [{
-            'id': 1,
-            'name': 'Add some tests',
-            'date': datetime.now(),
-            'submitter': {
-                'name': 'John Doe',
-                'email': 'john.doe@example.com',
-            },
-            'delegate': None,
-            'state': 'New',
-            'comment_count': 5,
-        }],
+        'patches': Patch.objects.all(),
+        'project': Project.objects.get(list_id=project_id),
     }
-
-    if project_id:
-        pass
 
     return render(request, 'diffusion/project_patches.html', context)

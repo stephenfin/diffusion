@@ -7,11 +7,11 @@ patches {{ app_name|title }}
 {% endblock %}
 
 {% block content %}
-<h1>Patches</h1>
+<h1>Issues</h1>
 
 <ul class="nav nav-tabs">
-  <li role="presentation"><a href="{% url 'diffusion.views.project.issues' project_id=project.list_id %}">Issues</a></li>
-  <li role="presentation" class="active"><a href="{% url 'diffusion.views.project.patches' project_id=project.list_id %}">Patches</a></li>
+  <li role="presentation" class="active"><a href="{% url 'diffusion.views.project.issues' project_id=project.list_id %}">Issues</a></li>
+  <li role="presentation"><a href="{% url 'diffusion.views.project.patches' project_id=project.list_id %}">Patches</a></li>
   <li role="presentation"><a href="{% url 'diffusion.views.project.series' project_id=project.list_id %}">Series</a></li>
 </ul>
 
@@ -27,22 +27,22 @@ patches {{ app_name|title }}
     </tr>
   </thead>
   <tbody>
-    {% for patch in patches %}
+    {% for issue in issues %}
     <tr>
       <td class="text-center">
-        <span class="label {% if patch.state == "closed" %}label-danger{% else %}label-success{% endif %}">{{ patch.state|title }}</span>
+        <span class="label {% if issue.state == "closed" %}label-danger{% else %}label-success{% endif %}">{{ issue.state|title }}</span>
       </td>
       <td class="text-center">
-        <a href="#" data-toggle="tooltip" data-original-title="Show all patches"><i class="demo-icon icon-flow-branch">&#xe800;</i></a>
+        <a href="#" data-toggle="tooltip" data-placement="top" data-original-title="Show all issues"><i class="fa fa-exclamation"></i></a>
       </td>
       <td>
-        {{ patch.title }}
+        {{ issue.title }}
       </td>
       <td>
-        {{patch.date|naturaltime}}
+        {{issue.date|naturaltime}}
       </td>
       <td>
-        <a href="mailto:{{patch.author.email}}">{{patch.author.name}}</a>
+        <a href="mailto:{{issue.author.email}}">{{issue.author.name}}</a>
       </td>
       <td class="text-center">
         <span class="badge">0</span>

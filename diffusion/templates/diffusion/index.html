@@ -6,40 +6,11 @@ projects {{ app_name|title }}
 {% endblock %}
 
 {% block content %}
-<div class="table-responsive">
-  <table class="projects table table-hover">
-    <thead class="hidden-xs">
-      <tr>
-        <th class="col-sm-6 col-md-3 col-lg-3">Project</th>
-        <th class="hidden-sm col-md-6 col-lg-6">Description</th>
-        <th class="hidden-sm hidden-md col-lg-3">Website</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for project in projects %}
-      <tr class="project">
-        <td>
-          <a href="{% url 'diffusion.views.project.patches' project_id=project.linkname %}" class="list-name">
-            {{project.linkname}}
-          </a>
-          <br>
-          <span class="project-address">
-            {{project.listemail}}
-          </span>
-        </td>
-        <td class="project-description hidden-sm">
-          {{project.name}}
-        </td>
-        <td class="project-url">
-  {% if project.web_url %}
-          <span class="project-url"><a href="{{project.web_url}}">
-            Link
-          </a></span>
-  {% endif %}
-        </td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
-</div>
+<h1>Projects</h1>
+
+<ul>
+  {% for project in projects %}
+  <li><a href="{% url 'diffusion.views.project.patches' project_id=project.list_id %}" class="list-name">{{ project.name }}</a></li>
+  {% endfor %}
+</ul>
 {% endblock %}
